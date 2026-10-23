@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'">
+<title>History</title>
+<style>
+html,body{margin:0;height:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Apple SD Gothic Neo","Malgun Gothic","Microsoft YaHei","PingFang SC",sans-serif;color:#0a0a0a;background:#fff;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column}
+.top{display:flex;align-items:flex-start;gap:8px;padding:16px 16px 12px;border-bottom:1px solid #e5e5e5}
+.top .t{flex:1;display:flex;flex-direction:column;gap:2px}
+h1{margin:0;font-size:16px;line-height:24px;font-weight:600}
+.desc{font-size:14px;line-height:20px;color:#737373}
+.round{width:28px;height:28px;border:none;padding:0;border-radius:9999px;background:rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;cursor:pointer;color:#0a0a0a;transition:background .15s}
+.round:hover{background:rgba(0,0,0,.14)}.round.active{background:rgba(0,0,0,.16)}
+.cal{display:flex;justify-content:center;padding:12px 0 16px}
+.calin{width:252px;display:flex;flex-direction:column;gap:6px}
+.calhead{display:flex;align-items:center;justify-content:space-between;font-size:14px;line-height:20px;font-weight:500}
+.ghost{width:24px;height:24px;border:none;padding:0;border-radius:6px;background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#0a0a0a}
+.ghost:hover{background:#f5f5f5}
+.grid{display:grid;grid-template-columns:repeat(7,36px)}
+.wd{height:24px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#737373}
+.cell{height:40px;margin:1px;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;opacity:.45}
+.cell .n{font-size:13px;line-height:16px;font-variant-numeric:tabular-nums}
+.cell .c{height:14px;font-size:10px;line-height:14px;font-weight:500;color:#737373}
+.cell.has{opacity:1;cursor:pointer}.cell.has:hover{background:#f5f5f5}
+.cell.today{opacity:1;background:#f5f5f5}.cell.today .n{font-weight:600}
+.cell.sel{background:#171717;color:#fafafa}.cell.sel .c{color:#fafafa}.cell.sel .n{font-weight:600}
+.filter{display:flex;align-items:center;gap:8px;padding:8px 16px;border-bottom:1px solid #e5e5e5;font-size:12px;line-height:16px;color:#737373}
+.filter span{flex:1}
+.btn{height:24px;padding:0 8px;border:none;border-radius:6px;background:transparent;font:inherit;font-size:12px;font-weight:500;color:#0a0a0a;cursor:pointer}
+.btn:hover{background:#f5f5f5}
+.list{flex:1;overflow:auto;padding:0 8px}
+.day{display:flex;flex-direction:column;gap:4px;padding:10px 8px 12px;border-bottom:1px solid #e5e5e5}
+.dl{font-size:12px;line-height:16px;font-weight:600;color:#737373;padding-bottom:4px}
+.e{display:flex;align-items:center;gap:8px;min-height:24px}
+.cb{flex:none;width:16px;height:16px;border-radius:4px;box-sizing:border-box;border:1px solid #d4d4d4;display:flex;align-items:center;justify-content:center;color:#fafafa;opacity:.6}
+.cb.on{background:#171717;border-color:#171717}
+.et{flex:1;min-width:0;font-size:13px;line-height:18px}
+.e.done .et{text-decoration:line-through;color:#737373}
+.tag{font-size:12px;line-height:16px;color:#737373}
+.memo{display:flex;flex-direction:column;gap:4px;margin-top:6px;padding:8px 10px;border-radius:8px;background:#f5f5f5}
+.mh{display:flex;align-items:center;gap:6px;font-size:12px;line-height:16px;font-weight:500;color:#737373}
+.mt{max-height:100px;overflow-y:auto;font-size:13px;line-height:20px;white-space:pre-wrap}
+.empty{padding:24px 8px;text-align:center;font-size:13px;line-height:20px;color:#737373}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="t"><h1 id="title"></h1><div class="desc" id="desc"></div></div>
+  <button class="round" id="calBtn"></button>
+</div>
+<div class="cal" id="cal" hidden>
+  <div class="calin">
+    <div class="calhead"><button class="ghost" id="prev"></button><span id="month"></span><button class="ghost" id="next"></button></div>
+    <div class="grid" id="grid"></div>
+  </div>
+</div>
+<div class="filter" id="filter" hidden><span id="filterLabel"></span><button class="btn" id="showAll"></button></div>
+<div class="list" id="list"></div>
+<script src="dev-mock.js"></script>
+<script src="i18n.js"></script>
+<script src="icons.js"></script>
+<script src="history.js"></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'">
+<title>Today</title>
+<style>
+html,body{margin:0;background:transparent;overflow:hidden}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Apple SD Gothic Neo","Malgun Gothic","Microsoft YaHei","PingFang SC",sans-serif;color:#0a0a0a;-webkit-font-smoothing:antialiased;user-select:none}
+#wrap{display:flex;flex-direction:column;gap:8px}
+.card{background:rgba(255,255,255,.94);border-radius:14px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08);overflow:hidden}
+.head{display:flex;flex-direction:column;gap:8px;padding:10px 14px;cursor:pointer}
+.row1,.row2{display:flex;align-items:center;gap:8px}
+.date{flex:1;font-size:12px;line-height:16px;font-weight:600;letter-spacing:.04em}
+.round{width:24px;height:24px;border:none;padding:0;border-radius:9999px;background:rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;cursor:pointer;color:#0a0a0a;transition:background .15s}
+.round:hover{background:rgba(0,0,0,.14)}.round.active{background:rgba(0,0,0,.16)}
+.bar{flex:1;height:4px;border-radius:9999px;background:rgba(23,23,23,.12);overflow:hidden}
+.fill{height:100%;background:#171717;border-radius:9999px;transition:width .2s}
+.count{font-size:12px;line-height:16px;color:#737373;font-variant-numeric:tabular-nums}
+#body{padding:0 6px 6px}
+.addrow{display:flex;align-items:center;gap:10px;height:30px;padding:0 8px;margin-bottom:2px;border-radius:8px;background:#fff;box-shadow:inset 0 0 0 1px #e5e5e5}
+.plain{flex:1;min-width:0;height:28px;border:none;outline:none;background:transparent;font:inherit;font-size:13px;color:#0a0a0a}
+.list{max-height:90px;overflow-y:auto;display:flex;flex-direction:column}
+.item{position:relative;flex:none;display:flex;align-items:center;gap:10px;height:30px;padding:0 8px;border-radius:8px;cursor:grab}
+.item:hover{background:rgb(245,245,245)}.item.dragging{opacity:.4}
+.cb{flex:none;width:16px;height:16px;border-radius:4px;box-sizing:border-box;border:1px solid #d4d4d4;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fafafa}
+.cb.on{background:#171717;border-color:#171717}
+.cb.ghost{cursor:default}
+.text{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px;line-height:18px;cursor:pointer}
+.text.marq{text-overflow:clip}.text.marq span{display:inline-block}
+.item.done .text{text-decoration:line-through;color:#737373}
+.from{flex:none;font-size:12px;line-height:16px;color:#737373;font-variant-numeric:tabular-nums}
+.tools{position:absolute;top:0;right:0;bottom:0;display:none;align-items:center;gap:4px;padding:0 6px 0 16px;border-radius:0 8px 8px 0;background:linear-gradient(to right,rgba(245,245,245,0),rgb(245,245,245) 14px)}
+.item:hover .tools{display:flex}.item.editing .tools{display:none}
+.tool{width:20px;height:20px;border:none;padding:0;border-radius:9999px;background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#737373}
+.tool:hover{background:rgba(0,0,0,.08);color:#0a0a0a}
+.edit{flex:1;min-width:0;height:24px;padding:0 6px;margin:0 -6px;border:none;outline:none;border-radius:6px;background:#fff;box-shadow:inset 0 0 0 1px #e5e5e5;font:inherit;font-size:13px;color:#0a0a0a}
+.memohead{display:flex;align-items:center;padding:8px 8px 4px 14px}
+.memohead span{flex:1;font-size:12px;line-height:16px;font-weight:600;letter-spacing:.04em}
+textarea{display:block;width:100%;box-sizing:border-box;height:120px;resize:none;border:none;outline:none;background:transparent;padding:4px 14px 12px;font:inherit;font-size:13px;line-height:20px;color:#0a0a0a;user-select:text}
+[hidden]{display:none!important}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-thumb{background:rgba(0,0,0,.15);border-radius:3px}
+</style>
+</head>
+<body>
+<div id="wrap">
+  <div class="card">
+    <div class="head" id="head">
+      <div class="row1">
+        <div class="date" id="date"></div>
+        <button class="round" id="addBtn"></button>
+        <button class="round" id="memoBtn"></button>
+      </div>
+      <div class="row2"><div class="bar"><div class="fill" id="fill"></div></div><div class="count" id="count"></div></div>
+    </div>
+    <div id="body">
+      <div class="addrow" id="addRow" hidden><span class="cb ghost"></span><input class="plain" id="addInput"></div>
+      <div class="list" id="list"></div>
+    </div>
+  </div>
+  <div class="card" id="memoCard" hidden>
+    <div class="memohead"><span id="memoTitle"></span><button class="tool" id="memoClose"></button></div>
+    <textarea id="memoText"></textarea>
+  </div>
+</div>
+<script src="dev-mock.js"></script>
+<script src="i18n.js"></script>
+<script src="icons.js"></script>
+<script src="widget.js"></script>
+</body>
+</html>
