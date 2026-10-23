@@ -27,6 +27,9 @@
       "target": "dmg",
       "icon": "assets/icon.png",
       "category": "public.app-category.productivity",
+      "identity": "-",
+      "hardenedRuntime": false,
+      "gatekeeperAssess": false,
       "extendInfo": {
         "LSUIElement": true
       }
